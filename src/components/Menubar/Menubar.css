@@ -3,27 +3,31 @@ nav {
     justify-content: space-around;
     height: 80px;
     align-items: center;
-    background-color: #1C2B35;;
-  }
-  .navigations {
+    background-color: #e3e3ea;
+}
+.navigations {
     display: flex;
-  }
-  .navigations a {
+}
+.navigations a {
     color: aliceblue;
     text-decoration: none;
     font-size: 17px;
     font-weight: 600;
     margin-right: 18px;
-  }
-  #toggler {
+}
+#toggler {
     display: none;
-  }
-  .nav-toggler-icon {
+}
+.nav-toggler-icon {
     display: none;
     color: orange;
-  }
-  .cart-btn {
+}
+.cart-btn {
     color: orange;
+}
+
+#bar-icon {
+  color: #5E2E87;
 }
 
   @media (max-width: 1023px) {
