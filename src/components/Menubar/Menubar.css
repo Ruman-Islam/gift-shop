@@ -3,7 +3,8 @@ nav {
     justify-content: space-around;
     height: 80px;
     align-items: center;
-    background-color: #e3e3ea;
+    /* background-color: #e3e3ea; */
+    background-color: #1C2B35;
 }
 .navigations {
     display: flex;
