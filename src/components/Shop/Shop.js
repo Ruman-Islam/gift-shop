@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
-import GiftCard from '../GiftCard/GiftCard';
+import Product from '../Product/Product';
 import './Shop.css';
 
 const Shop = () => {
-    const [gifts, setGifts] = useState([]);
+    const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
-    const handleAddToCart = (gift) => {
-        const newCart = [...cart, gift]
+    const handleAddToCart = (product) => {
+        const newCart = [...cart, product]
         setCart(newCart);
-        console.log(newCart);
+    }
+
+    const handleClearCart = () => {
+        setCart([]);
     }
 
     useEffect(() => {
         fetch('products.json')
             .then(res => res.json())
-            .then(data => setGifts(data))
+            .then(data => setProducts(data))
     }, [])
+
     return (
-        <div className='shop-container'>
-            <div className="gift-container container">
+        <div className='shop-container container'>
+            <div className="product-container">
                 {
-                    gifts.map(gift =>
-                        <GiftCard key={gift.id}
-                            gift={gift}
+                    products.map(product =>
+                        <Product key={product.id}
+                            product={product}
                             handleAddToCart={handleAddToCart}
                         />)
                 }
             </div>
             <div className="cart-container">
-                <Cart cart={cart} />
+                <Cart cart={cart} handleClearCart={handleClearCart} />
             </div>
         </div>
     );

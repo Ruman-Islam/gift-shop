@@ -14,7 +14,7 @@
     border-radius: 50%;
 }
 
-.img-container, .btn-container {
+.img-container, .item-btn-container {
     width: 10%;
 }
 
@@ -23,7 +23,17 @@
     width: 60%;
 }
 
-.btn-container .delete-btn {
+.item-btn-container .delete-btn {
     color: #FF3030;
     border: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .img-container img {
+        width: 20px !important;
+        border-radius: 50%;
+    }
+    .name-container h6{
+        font-size: 12px;
+    }
 }

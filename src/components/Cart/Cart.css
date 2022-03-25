@@ -1,0 +1,16 @@
+.btn-container .randomize-btn {
+    color: green;
+    border: 1px solid green;
+}
+
+.btn-container .clear-items-btn {
+    color: purple;
+    border: 1px solid purple;
+}
+
+.btn-container .randomize-btn,  .clear-items-btn {
+    padding: 10px;
+    font-weight: 600;
+    display: block;
+    margin: 20px;
+}

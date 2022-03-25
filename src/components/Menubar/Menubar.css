@@ -3,28 +3,28 @@ nav {
     justify-content: space-around;
     height: 80px;
     align-items: center;
-    /* background-color: #e3e3ea; */
-    background-color: #1C2B35;
+    background-color: #FFFFFF;
 }
 .navigations {
     display: flex;
 }
 .navigations a {
-    color: aliceblue;
+    color: #5E2E87;
     text-decoration: none;
     font-size: 17px;
     font-weight: 600;
     margin-right: 18px;
+    margin-top: 10px;
 }
 #toggler {
     display: none;
 }
 .nav-toggler-icon {
     display: none;
-    color: orange;
 }
 .cart-btn {
-    color: orange;
+  margin-top: 12px;
+    color: #5E2E87;
 }
 
 #bar-icon {
@@ -49,7 +49,7 @@ nav {
         width: 100%;
         padding: 15px 0;
         background-color: #1C2B35;
-        transform: scale(0.5) translateY(-450px);
+        transform: translateY(-450px);
         transition: 0.5s ease-in-out;
         opacity: 0;
         z-index: 5;

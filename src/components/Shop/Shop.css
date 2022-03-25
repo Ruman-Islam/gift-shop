@@ -1,12 +1,12 @@
 .shop-container {
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 5fr 2fr;
     margin-top: 50px;
 }
-.gift-container {
+.product-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 30px 0;
     align-items: center;
     justify-items: center;
     margin-bottom: 50px;
@@ -28,10 +28,13 @@
 
 @media screen and (max-width: 1023px) {
     .shop-container {
-        grid-template-columns: 5fr 4fr;  /*grid-template-columns: 5fr 2fr*/
+        grid-template-columns: 6fr;  /*grid-template-columns: 5fr 2fr*/
     }
-    .gift-container {
-        grid-template-columns: repeat(1, 1fr); /*grid-template-columns: repeat(2, 1fr)*/
+    .product-container {
+        grid-template-columns: repeat(2, 1fr); /*grid-template-columns: repeat(2, 1fr)*/
+    }
+    .cart-container {
+        display: none;
     }
 }
 
@@ -39,7 +42,7 @@
     .shop-container {
         grid-template-columns: 4fr;
     }
-    .gift-container {
+    .product-container {
         grid-template-columns: repeat(1, 1fr);
     }
     .cart-container {

@@ -11,9 +11,9 @@ const CartItem = ({ cartItem: { img, name } }) => {
                 <img src={img} alt="" />
             </div>
             <div className='name-container'>
-                <h6>{name.length <= 25 ? name : name.slice(0, 20) + '...'}</h6>
+                <h6>{name.length <= 15 ? name : name.slice(0, 15) + '...'}</h6>
             </div>
-            <div className='btn-container'>
+            <div className='item-btn-container'>
                 <button className='delete-btn'>
                     <FontAwesomeIcon className='icon' icon={faTrashCan} />
                 </button>
