@@ -1,0 +1,24 @@
+.card {
+    width: 350px;
+    border-radius: 10px;
+    font-family: Comic Sans MS,Comic Sans;
+}
+
+.add-to-cart {
+    width: 100%;
+    background-color: #573276;
+    color: aliceblue;
+    font-weight: 400;
+    border: 0;
+    border-radius: 0 0 10px 10px;
+    padding: 10px 0;
+}
+
+.icon {
+    margin-left: 10px;
+}
+@media screen and (max-width: 1023px) {
+    .card {
+        width: 200px;
+    }
+}
