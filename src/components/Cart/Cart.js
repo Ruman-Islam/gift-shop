@@ -1,15 +1,17 @@
 import React from 'react';
+import CartItem from '../CartItem/CartItem';
 import './Cart.css';
 
-const Cart = () => {
+const Cart = ({ cart }) => {
     return (
         <div className='cart'>
-            <h4>Order Summary</h4>
-            <p>Selected Items: </p>
-            <p>Total Price: {'$'} </p>
-            <p>Total Shipping Charge: {'$'} </p>
-            <p>Tax: {'$'} </p>
-            <h5>Grand Total: {'$'} </h5>
+            {/* <h4>Order Summary</h4> */}
+            <h5>Selected Gifts: {cart.length}</h5>
+            <div className="cart-items-container">
+                {
+                    cart.map(cartItem => <CartItem key={cartItem.id} cartItem={cartItem} />)
+                }
+            </div>
             {/* <div className='btn-container'>
                 <button className='clear-btn' onClick={handleDeleteCart}>
                     Clear Cart

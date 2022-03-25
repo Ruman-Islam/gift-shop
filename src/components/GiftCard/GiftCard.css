@@ -17,7 +17,14 @@
 .icon {
     margin-left: 10px;
 }
+
 @media screen and (max-width: 1023px) {
+    .card {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 540px) {
     .card {
         width: 200px;
     }

@@ -3,9 +3,9 @@ import './GiftCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
-const GiftCard = ({ gift }) => {
+const GiftCard = ({ gift, handleAddToCart }) => {
     const { name, price, img } = gift;
-    console.log(gift);
+    // console.log(gift);
     return (
         <div className="card h-100">
             <img src={img} className="img" alt="product" />
@@ -14,6 +14,7 @@ const GiftCard = ({ gift }) => {
                 <p className="card-text">Price: {'$'}{price}</p>
             </div>
             <button
+                onClick={() => handleAddToCart(gift)}
                 className='add-to-cart'>
                 Add to Cart
                 <FontAwesomeIcon className="icon" icon={faCartPlus} />
