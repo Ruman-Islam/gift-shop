@@ -1,0 +1,58 @@
+nav {
+    display: flex;
+    justify-content: space-around;
+    height: 80px;
+    align-items: center;
+    background-color: #1C2B35;;
+  }
+  .navigations {
+    display: flex;
+  }
+  .navigations a {
+    color: aliceblue;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    margin-right: 18px;
+  }
+  #toggler {
+    display: none;
+  }
+  .nav-toggler-icon {
+    display: none;
+    color: orange;
+  }
+  .cart-btn {
+    color: orange;
+}
+
+  @media (max-width: 1023px) {
+      nav .navigations a {
+        margin-right: 0;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+      nav .nav-toggler-icon {
+        display: block;
+      }
+      .navigations {
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 78px;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+        background-color: #1C2B35;
+        transform: scale(0.5) translateY(-450px);
+        transition: 0.5s ease-in-out;
+        opacity: 0;
+        z-index: 5;
+
+      }
+      #toggler:checked ~ .navigations {
+        transform: scale(1) translateY(0);
+        transition: 0.5s ease-in-out;
+        opacity: 1;
+      }
+  }
