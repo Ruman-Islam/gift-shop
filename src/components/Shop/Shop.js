@@ -11,12 +11,16 @@ const Shop = () => {
 
     // Product add to cart function //
     const handleAddToCart = (selectedItem) => {
-        const existingItem = cart.find(product => product.id === selectedItem.id);
-        if (existingItem) {
-            alert("Same item can't be added")
+        if (cart.length >= 4) {
+            alert('You have already selected 4 items');
         } else {
-            const newCart = [...cart, selectedItem]
-            setCart(newCart);
+            const existingItem = cart.find(product => product.id === selectedItem.id);
+            if (existingItem) {
+                alert("Same item can't be added twice");
+            } else {
+                const newCart = [...cart, selectedItem];
+                setCart(newCart);
+            }
         }
     }
 
