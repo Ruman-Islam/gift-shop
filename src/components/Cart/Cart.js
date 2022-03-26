@@ -1,19 +1,11 @@
-import React, { useState } from 'react';
 import CartItem from '../CartItem/CartItem';
 import { handleRandomization } from '../Utilities/UtilitiesFunction';
 import './Cart.css';
 
 const Cart = ({ cart, setCart, handleClearCart, handleRemoveFromCart }) => {
-    const [index, setIndex] = useState();
 
     return (
         <div className='cart'>
-            <h6>Auto Suggest:</h6>
-            {
-                cart[index] ?
-                    <CartItem cartItem={cart[index]} isTrue />
-                    : null
-            }
             <h5>Selected Gifts: {cart.length}</h5>
             <div className="cart-items-container">
                 {
@@ -26,11 +18,11 @@ const Cart = ({ cart, setCart, handleClearCart, handleRemoveFromCart }) => {
                 }
             </div>
             <div className='btn-container'>
-                <button onClick={() => handleRandomization(cart, setIndex)} className='randomize-btn'>
+                <button onClick={() => handleRandomization(cart, setCart)} className='randomize-btn'>
                     Choose Random
                 </button>
                 <button onClick={() => handleClearCart(setCart)} className='clear-items-btn'>
-                    Remove Cart
+                    Reset Cart
                 </button>
             </div>
         </div>

@@ -4,8 +4,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './CartItem.css';
 
 
-const CartItem = ({ cartItem, handleRemoveFromCart, isTrue }) => {
-    const { img, name } = cartItem;
+const CartItem = ({ cartItem, cartItem: { img, name }, handleRemoveFromCart }) => {
 
     return (
         <div className='cart-item'>
@@ -18,8 +17,7 @@ const CartItem = ({ cartItem, handleRemoveFromCart, isTrue }) => {
             <div className='item-btn-container'>
                 <button
                     onClick={() => handleRemoveFromCart(cartItem)}
-                    className='delete-btn'
-                    style={isTrue ? { display: 'none' } : { display: 'block' }}>
+                    className='delete-btn'>
                     <FontAwesomeIcon className='icon' icon={faTrashCan} />
                 </button>
             </div>
