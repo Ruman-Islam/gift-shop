@@ -3,7 +3,7 @@ import CartItem from '../CartItem/CartItem';
 import { handleRandomization } from '../Utilities/UtilitiesFunction';
 import './Cart.css';
 
-const Cart = ({ cart, handleClearCart }) => {
+const Cart = ({ cart, setCart, handleClearCart }) => {
     const [index, setIndex] = useState();
 
     return (
@@ -26,10 +26,10 @@ const Cart = ({ cart, handleClearCart }) => {
             </div>
             <div className='btn-container'>
                 <button onClick={() => handleRandomization(cart, setIndex)} className='randomize-btn'>
-                    CHOOSE 1 FOR ME
+                    Choose Random
                 </button>
-                <button onClick={handleClearCart} className='clear-items-btn'>
-                    CHOOSE AGAIN
+                <button onClick={() => handleClearCart(setCart)} className='clear-items-btn'>
+                    Remove Cart
                 </button>
             </div>
         </div>

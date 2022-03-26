@@ -1,11 +1,11 @@
-const getRandomIndex = (cart) => {
-    const randomNumber = Math.round(Math.random() * cart.length);
+const getRandomIndex = (cartLength) => {
+    const randomNumber = Math.floor(Math.random() * cartLength);
     return randomNumber;
 }
 
 const handleRandomization = (cart, setIndex) => {
     if (cart.length > 0) {
-        const pin = getRandomIndex(cart);
+        const pin = getRandomIndex(cart.length);
         if (pin < cart.length) {
             setIndex(pin);
         } else {
@@ -14,6 +14,11 @@ const handleRandomization = (cart, setIndex) => {
     }
 }
 
+const handleClearCart = (setCart) => {
+    setCart([]);
+}
+
 export {
-    handleRandomization
+    handleRandomization,
+    handleClearCart
 }
