@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './CartItem.css';
+import { removeFromLocalStorage } from '../Utilities/UtilitiesFunction';
 
 
 const CartItem = ({ cartItem, cartItem: { img, name }, handleRemoveFromCart }) => {
@@ -16,7 +17,7 @@ const CartItem = ({ cartItem, cartItem: { img, name }, handleRemoveFromCart }) =
             </div>
             <div className='item-btn-container'>
                 <button
-                    onClick={() => handleRemoveFromCart(cartItem)}
+                    onClick={() => handleRemoveFromCart(cartItem) + removeFromLocalStorage(cartItem.id)}
                     className='delete-btn'>
                     <FontAwesomeIcon className='icon' icon={faTrashCan} />
                 </button>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import OffCanvas from '../OffCanvas/OffCanvas';
 import Product from '../Product/Product';
-import { handleClearCart } from '../Utilities/UtilitiesFunction';
+import { addToLocalStorage, getStoredCart, removeFromLocalStorage } from '../Utilities/UtilitiesFunction';
 import './Shop.css';
 
 const Shop = () => {
@@ -14,20 +14,39 @@ const Shop = () => {
         if (cart.length >= 4) {
             alert('You have already selected 4 items');
         } else {
-            const existingItem = cart.find(product => product.id === selectedItem.id);
-            if (existingItem) {
+            let newCart = [];
+            const existingProduct = cart.find(product => product.id === selectedItem.id);
+            if (existingProduct) {
                 alert("Same item can't be added twice");
             } else {
-                const newCart = [...cart, selectedItem];
+                selectedItem.quantity = 1;
+                newCart = [...cart, selectedItem];
                 setCart(newCart);
+                addToLocalStorage(selectedItem.id);
             }
         }
     }
+
+    // Getting data from local storage while first time loading website //
+    useEffect(() => {
+        const storedCart = getStoredCart();
+        const savedProduct = [];
+        for (const id in storedCart) {
+            const addedProduct = products.find(product => product.id === id);
+            if (addedProduct) {
+                const quantity = storedCart[id]
+                addedProduct.quantity = quantity;
+                savedProduct.push(addedProduct);
+            }
+        }
+        setCart(savedProduct);
+    }, [products])
 
     // single product remove function from cart //
     const handleRemoveFromCart = (selectedItem) => {
         const restItems = cart.filter(cartItem => cartItem.id !== selectedItem.id);
         setCart(restItems);
+        removeFromLocalStorage(selectedItem.id);
     }
 
     useEffect(() => {  // data loading //
@@ -50,7 +69,6 @@ const Shop = () => {
             <div className="cart-container">
                 <Cart cart={cart}
                     setCart={setCart}
-                    handleClearCart={handleClearCart}
                     handleRemoveFromCart={handleRemoveFromCart}
                 />
             </div>
@@ -59,7 +77,6 @@ const Shop = () => {
                 <OffCanvas
                     cart={cart}
                     setCart={setCart}
-                    handleClearCart={handleClearCart}
                     handleRemoveFromCart={handleRemoveFromCart}
                 />
             </div>

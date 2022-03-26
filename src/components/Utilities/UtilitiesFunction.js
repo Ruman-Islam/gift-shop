@@ -18,12 +18,53 @@ const handleRandomization = (cart, setCart) => {
     }
 }
 
-// Reset whole cart function //
-const handleClearCart = (setCart) => {
-    setCart([])
+
+// Add product to local storage, if exists product increase quantity //
+const addToLocalStorage = (id) => {
+    const shoppingCart = getStoredCart();
+
+    const quantity = shoppingCart[id];
+    if (quantity) {
+        const newQuantity = quantity + 1;
+        shoppingCart[id] = newQuantity;
+    } else {
+        shoppingCart[id] = 1;
+    }
+    localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+}
+
+// Load product from local storage //
+const getStoredCart = () => {
+    let shoppingCart = {};
+
+    const storedCart = localStorage.getItem('shopping-cart');
+    if (storedCart) {
+        shoppingCart = JSON.parse(storedCart);
+    }
+    return shoppingCart;
+}
+
+// Remove individual product from local storage //
+const removeFromLocalStorage = id => {
+    const storedCart = localStorage.getItem('shopping-cart');
+    if (storedCart) {
+        const shoppingCart = JSON.parse(storedCart);
+        if (id in shoppingCart) {
+            delete shoppingCart[id];
+            localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+        }
+    }
+}
+
+// Delete all product from local storage //
+const deleteShoppingCart = () => {
+    localStorage.removeItem('shopping-cart');
 }
 
 export {
     handleRandomization,
-    handleClearCart
+    addToLocalStorage,
+    getStoredCart,
+    removeFromLocalStorage,
+    deleteShoppingCart
 }
