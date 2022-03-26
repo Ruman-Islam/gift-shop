@@ -4,9 +4,7 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: aliceblue;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
+    padding: 5px;
 }
 
 .img-container img {

@@ -1,11 +1,11 @@
 .btn-container .randomize-btn {
-    color: green;
-    border: 1px solid green;
+    color: purple;
+    border: 1px solid purple;
 }
 
 .btn-container .clear-items-btn {
-    color: purple;
-    border: 1px solid purple;
+    color: #DE4839;
+    border: 1px solid #DE4839;
 }
 
 .btn-container .randomize-btn,  .clear-items-btn {
@@ -13,4 +13,9 @@
     font-weight: 600;
     display: block;
     margin: 20px;
+    border-radius: 5px;
+}
+
+.cart-title {
+    border-bottom: lightslategray 1px solid;
 }
