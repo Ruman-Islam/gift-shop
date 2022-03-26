@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css';
 
-const Shop = () => {
+const Shop = ({ setItemsCount }) => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
@@ -22,6 +23,8 @@ const Shop = () => {
             .then(data => setProducts(data))
     }, [])
 
+    setItemsCount(cart.length);
+
     return (
         <div className='shop-container container'>
             <div className="product-container">
@@ -35,6 +38,17 @@ const Shop = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={cart} handleClearCart={handleClearCart} />
+            </div>
+            <div className="offCanvas">
+                <div className="offcanvas offcanvas-start w-100" tabIndex="1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div className="offcanvas-header">
+                        <h5 className="offcanvas-title" id="offcanvasExampleLabel"></h5>
+                        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div className="offcanvas-body">
+                        <Cart cart={cart} handleClearCart={handleClearCart} />
+                    </div>
+                </div>
             </div>
         </div>
     );

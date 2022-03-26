@@ -35,7 +35,7 @@ nav {
       nav .navigations a {
         margin-right: 0;
         margin-bottom: 10px;
-        color: #fff;
+        color: #5E2E87;
       }
       nav .nav-toggler-icon {
         display: block;
@@ -48,7 +48,7 @@ nav {
         left: 0;
         width: 100%;
         padding: 15px 0;
-        background-color: #1C2B35;
+        background-color: #FFFFFF;
         transform: translateY(-450px);
         transition: 0.5s ease-in-out;
         opacity: 0;

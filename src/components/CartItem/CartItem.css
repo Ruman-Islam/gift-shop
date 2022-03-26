@@ -6,7 +6,7 @@
     background-color: aliceblue;
     padding: 10px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .img-container img {
@@ -21,11 +21,16 @@
 .name-container {
     margin-top: 5px;
     width: 60%;
+    color: #5E2E87;
 }
 
 .item-btn-container .delete-btn {
     color: #FF3030;
     border: 0;
+}
+
+button {
+    background-color: aliceblue;
 }
 
 @media screen and (max-width: 1024px) {

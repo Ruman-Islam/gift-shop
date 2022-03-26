@@ -18,21 +18,21 @@
     "quantity": 0
   },
   {
-    "id": "307f166f-1d04-4573-bc37-2f461ea9d4f7",
-    "name": "Gorgeous Flower Bouquet",
-    "price": 1200,
-    "ratings": 4,
-    "img": "https://stygen.gift/assets/uploads/product/1631098926-2001.webp",
-    "shipping": 25,
-    "quantity": 0
-  },
-  {
     "id": "4bf9798f-63bc-4a83-b0c6-6a3b816fe922",
     "name": "Full Body Pillow Cute Cartoon",
     "price": 2599,
     "ratings": 5,
     "img": "https://stygen.gift/assets/uploads/product/1631792060-ST-53%20Lion%20(1).jpg",
     "shipping": 32,
+    "quantity": 0
+  },
+  {
+    "id": "307f166f-1d04-4573-bc37-2f461ea9d4f7",
+    "name": "Gorgeous Flower Bouquet",
+    "price": 1200,
+    "ratings": 4,
+    "img": "https://stygen.gift/assets/uploads/product/1631098926-2001.webp",
+    "shipping": 25,
     "quantity": 0
   },
   {
