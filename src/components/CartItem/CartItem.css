@@ -36,7 +36,6 @@ button {
 @media screen and (max-width: 1024px) {
     .img-container img {
         width: 20px !important;
-        border-radius: 50%;
     }
     .name-container h6{
         font-size: 12px;
