@@ -1,25 +1,32 @@
-/* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
+import OffCanvas from '../OffCanvas/OffCanvas';
 import Product from '../Product/Product';
 import { handleClearCart } from '../Utilities/UtilitiesFunction';
 import './Shop.css';
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [products, setProducts] = useState([]);  // Initial products loading //
+    const [cart, setCart] = useState([]); // shopping cart //
 
-    const handleAddToCart = (product) => {
-        const newCart = [...cart, product]
-        setCart(newCart);
+    // Product add to cart function //
+    const handleAddToCart = (selectedItem) => {
+        const existingItem = cart.find(product => product.id === selectedItem.id);
+        if (existingItem) {
+            alert("Same item can't be added")
+        } else {
+            const newCart = [...cart, selectedItem]
+            setCart(newCart);
+        }
     }
 
+    // single product remove function from cart //
     const handleRemoveFromCart = (selectedItem) => {
         const restItems = cart.filter(cartItem => cartItem.id !== selectedItem.id);
         setCart(restItems);
     }
 
-    useEffect(() => {
+    useEffect(() => {  // data loading //
         fetch('products.json')
             .then(res => res.json())
             .then(data => setProducts(data))
@@ -43,20 +50,14 @@ const Shop = () => {
                     handleRemoveFromCart={handleRemoveFromCart}
                 />
             </div>
-            <div className="offCanvas">
-                <div className="offcanvas offcanvas-start w-100" tabIndex="1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                    <div className="offcanvas-header">
-                        <h5 className="offcanvas-title" id="offcanvasExampleLabel"></h5>
-                        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div className="offcanvas-body">
-                        <Cart cart={cart}
-                            setCart={setCart}
-                            handleClearCart={handleClearCart}
-                            handleRemoveFromCart={handleRemoveFromCart}
-                        />
-                    </div>
-                </div>
+
+            <div className="offCanvas">  {/* off canvas for mobile device */}
+                <OffCanvas
+                    cart={cart}
+                    setCart={setCart}
+                    handleClearCart={handleClearCart}
+                    handleRemoveFromCart={handleRemoveFromCart}
+                />
             </div>
         </div>
     );
