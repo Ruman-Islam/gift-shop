@@ -14,6 +14,11 @@ const Shop = () => {
         setCart(newCart);
     }
 
+    const handleRemoveFromCart = (selectedItem) => {
+        const restItems = cart.filter(cartItem => cartItem.id !== selectedItem.id);
+        setCart(restItems);
+    }
+
     useEffect(() => {
         fetch('products.json')
             .then(res => res.json())
@@ -35,6 +40,7 @@ const Shop = () => {
                 <Cart cart={cart}
                     setCart={setCart}
                     handleClearCart={handleClearCart}
+                    handleRemoveFromCart={handleRemoveFromCart}
                 />
             </div>
             <div className="offCanvas">
@@ -47,6 +53,7 @@ const Shop = () => {
                         <Cart cart={cart}
                             setCart={setCart}
                             handleClearCart={handleClearCart}
+                            handleRemoveFromCart={handleRemoveFromCart}
                         />
                     </div>
                 </div>
