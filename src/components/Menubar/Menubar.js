@@ -1,6 +1,5 @@
 import React from 'react';
 import './Menubar.css';
-import logo from '../../images/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +7,7 @@ const Menubar = () => {
     return (
         <nav>
             <div className="logo">
-                <img src={logo} alt="" />
+                <h1 className='logo'>Wish</h1>
             </div>
             <input type="checkbox" id="toggler" />
             <label className="nav-toggler-icon" htmlFor="toggler">

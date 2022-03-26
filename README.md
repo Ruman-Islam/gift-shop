@@ -1,4 +1,4 @@
-# STYGEN (Gift Shop)
+# WISH (Gift Shop)
 
 #### Website: https://lucky-one2.netlify.app/
 
