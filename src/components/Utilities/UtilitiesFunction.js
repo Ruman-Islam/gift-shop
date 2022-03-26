@@ -15,6 +15,11 @@ const handleRandomization = (cart, setCart) => {
         } else {
             handleRandomization();
         }
+        // Storing only randomized product to local storage //
+        const restProducts = cart.filter(product => product.id !== newCart[0].id)
+        for (const restProduct of restProducts) {
+            removeFromLocalStorage(restProduct.id)
+        }
     }
 }
 
