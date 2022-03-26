@@ -8,7 +8,7 @@ const Cart = ({ cart, handleClearCart }) => {
 
     return (
         <div className='cart'>
-            <h5>Auto Suggest</h5>
+            <h6>Auto Suggest:</h6>
             {
                 cart[index] ?
                     <CartItem cartItem={cart[index]} />
