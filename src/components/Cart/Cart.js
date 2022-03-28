@@ -13,7 +13,7 @@ const Cart = ({ cart, setCart, handleRemoveFromCart }) => {
 
     return (
         <div className='cart'>
-            <h6 className='cart-title'>Selected Gifts: {cart.length}</h6>
+            <h5 className='cart-title'>Selected Gifts: {cart.length}</h5>
             <div className="cart-items-container">
                 {
                     cart.map(cartItem =>
