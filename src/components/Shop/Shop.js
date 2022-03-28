@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import swal from 'sweetalert';
 import Cart from '../Cart/Cart';
 import OffCanvas from '../OffCanvas/OffCanvas';
 import Product from '../Product/Product';
@@ -12,12 +13,12 @@ const Shop = () => {
     // Product add to cart function //
     const handleAddToCart = (selectedItem) => {
         if (cart.length >= 4) {
-            alert('You have already selected 4 items');
+            swal("Opps!", "You've already selected 4 items", "warning", { button: "Okay" })
         } else {
             let newCart = [];
             const existingProduct = cart.find(product => product.id === selectedItem.id);
             if (existingProduct) {
-                alert("Same item can't be added twice");
+                swal("Opps!", "Same item can't be added twice", "warning", { button: "Okay" })
             } else {
                 selectedItem.quantity = 1;
                 newCart = [...cart, selectedItem];

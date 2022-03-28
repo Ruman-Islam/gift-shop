@@ -13,7 +13,7 @@
 }
 
 .cart-container {
-    background-color: aliceblue;
+    background-color: #BDCAD2;
     padding: 30px;
     border-radius: 10px;
     height: 100vh;
@@ -29,6 +29,13 @@
 .offCanvas {
     display: none;
 }
+
+.custom-alert {
+    position: absolute;
+    top: 0;
+    left: 500px;
+    z-index: 2;
+  }  
 
 
 @media screen and (max-width: 1023px) {

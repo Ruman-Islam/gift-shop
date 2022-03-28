@@ -5,6 +5,8 @@
     align-items: center;
     background-color: aliceblue;
     padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 8px;
 }
 
 .img-container img {

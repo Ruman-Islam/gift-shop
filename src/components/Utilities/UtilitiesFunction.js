@@ -9,16 +9,12 @@ const handleRandomization = (cart, setCart) => {
     let newCart = [];
     if (cart.length > 0) {
         const index = getRandomIndex(cart.length);
-        if (index < cart.length) {
-            newCart.push(cart[index]);
-            setCart(newCart);
-        } else {
-            handleRandomization();
-        }
-        // Storing only randomized product to local storage //
+        newCart.push(cart[index]);
+        setCart(newCart);
+        // // Storing only randomized product to local storage //
         const restProducts = cart.filter(product => product.id !== newCart[0].id)
         for (const restProduct of restProducts) {
-            removeFromLocalStorage(restProduct.id)
+            removeFromLocalStorage(restProduct.id);
         }
     }
 }
