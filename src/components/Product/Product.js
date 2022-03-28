@@ -6,7 +6,9 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 const Product = ({ product, product: { name, price, img }, handleAddToCart }) => {
     return (
         <div className="card h-100 rounded">
-            <img src={img} className="img-fluid" alt="product" />
+            <div className="product-img-container">
+                <img src={img} alt="product" />
+            </div>
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">Price: {'$'}{price}</p>

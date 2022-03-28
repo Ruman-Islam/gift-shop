@@ -1,6 +1,6 @@
 # WISH (Gift Shop)
 
-#### Website: https://lucky-one2.netlify.app/
+#### Website: https://gift-shopp.netlify.app/
 
 ## Description
 

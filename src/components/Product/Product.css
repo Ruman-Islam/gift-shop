@@ -3,6 +3,17 @@
     font-family: Comic Sans MS,Comic Sans;
 }
 
+.card .product-img-container {
+    width: 100%;
+    border-bottom: 1px solid #573276;
+    overflow: hidden;
+}
+
+.card img:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: .4s ease-in;
+}
 
 .add-to-cart {
     width: 100%;
@@ -11,6 +22,12 @@
     font-weight: 400;
     border: 0;
     padding: 10px 0;
+}
+
+.add-to-cart:hover {
+    background-color: whitesmoke;
+    color: #573276;
+    transition: .2s linear;
 }
 
 .icon {

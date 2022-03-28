@@ -1,5 +1,5 @@
 import './App.css';
-import FAQ from './components/FAQ/FAQ';
+// import FAQ from './components/FAQ/FAQ';
 import Menubar from './components/Menubar/Menubar';
 import Shop from './components/Shop/Shop';
 
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Menubar />
       <Shop />
-      <FAQ />
+      {/* <FAQ /> */}
     </div>
   );
 }
