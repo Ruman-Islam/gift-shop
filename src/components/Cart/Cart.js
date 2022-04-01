@@ -1,20 +1,22 @@
 import { deleteShoppingCart, handleRandomization } from '../Utilities/UtilitiesFunction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faRandom, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import './Cart.css';
 import { useNavigate } from 'react-router-dom';
+import './Cart.css';
 
-const Cart = ({ isTrue, cart, setCart, children: { props: { children } = {} } = {} }) => {
+const Cart = ({ isTrue, cart, setCart, children: { props: { children } } }) => {
     const navigate = useNavigate();
 
     let totalPrice = 0;
     let totalDeliveryCharge = 0;
     let quantity = 0;
+
     for (const product of cart) {
         quantity += product.quantity;
         totalPrice += product.price * product.quantity;
         totalDeliveryCharge += product.deliveryCharge * product.quantity;
     }
+
     const tax = parseFloat((totalPrice * 0.1).toFixed(2));
     const grandTotal = totalPrice + totalDeliveryCharge + tax;
 

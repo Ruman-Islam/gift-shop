@@ -10,11 +10,9 @@ const OffCanvas = ({ cart, setCart, handleClearCart, handleRemoveFromCart }) => 
                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div className="offcanvas-body">
-                <Cart cart={cart}
-                    setCart={setCart}
-                    handleClearCart={handleClearCart}
-                    handleRemoveFromCart={handleRemoveFromCart}
-                />
+                <Cart cart={cart} setCart={setCart} handleClearCart={handleClearCart} handleRemoveFromCart={handleRemoveFromCart}>
+                    <p>Review Order</p>
+                </Cart>
             </div>
         </div>
     );

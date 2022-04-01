@@ -3,8 +3,8 @@ import useProducts from '../../hooks/useProducts';
 import OffCanvas from '../OffCanvas/OffCanvas';
 import Product from '../Product/Product';
 import { addToLocalStorage } from '../Utilities/UtilitiesFunction';
-import './Shop.css';
 import useCart from '../../hooks/useCart';
+import './Shop.css';
 
 
 const Shop = () => {
@@ -45,11 +45,7 @@ const Shop = () => {
             </div>
 
             <div className="offCanvas">  {/* off canvas for mobile device */}
-                <OffCanvas
-                    cart={cart}
-                    setCart={setCart}
-                // handleRemoveFromCart={handleRemoveFromCart}
-                > <p>Review Order</p> </OffCanvas>
+                <OffCanvas cart={cart} setCart={setCart}> </OffCanvas>
             </div>
         </div>
     );
