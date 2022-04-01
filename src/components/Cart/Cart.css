@@ -12,8 +12,7 @@
 }
 
 .btn-container .randomize-btn,  .clear-items-btn {
-    width: 100%;
-    margin: 0 auto;
+    width: 60%;
     padding: 3px 20px;
     font-weight: 600;
     display: block;
@@ -28,4 +27,11 @@
 .cart-title {
     border-bottom: white 1px solid;
     line-height: 1.5;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .btn-container .randomize-btn,  .clear-items-btn{
+        margin: 10px auto;
+    }
 }

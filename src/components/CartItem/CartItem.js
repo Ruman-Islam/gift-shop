@@ -3,7 +3,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './CartItem.css';
 
 
-const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price, quantity } }) => {
+const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price, quantity, deliveryCharge } }) => {
     console.log(handleRemoveFromCart);
     return (
         <div className='cart-item'>
@@ -11,9 +11,12 @@ const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price
                 <img src={img} alt="" />
             </div>
             <div className='name-container'>
-                <h6>{name.length <= 15 ? name : name.slice(0, 15) + '...'}</h6>
-                <p>Price: $ {price}</p>
-                <p>Quantity: {quantity}</p>
+                <h6 className='item-name' title={name}>
+                    {name.length > 30 ? name.slice(0, 30) + '...' : name}
+                </h6>
+                <p className='item-name'>Price: $ {price}</p>
+                <small className='item-name'>Quantity: {quantity}</small>
+                <small className='item-name'>Delivery Charge: $ {deliveryCharge}</small>
             </div>
             <div className='item-btn-container'>
                 <button

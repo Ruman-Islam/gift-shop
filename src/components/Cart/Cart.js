@@ -1,4 +1,3 @@
-import CartItem from '../CartItem/CartItem';
 import { deleteShoppingCart, handleRandomization } from '../Utilities/UtilitiesFunction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faRandom, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Cart = ({ isTrue, cart, setCart, handleRemoveFromCart, children: { props: { children } = {} } = {} }) => {
     const navigate = useNavigate();
+
     let totalPrice = 0;
     let totalDeliveryCharge = 0;
     let quantity = 0;
@@ -17,6 +17,7 @@ const Cart = ({ isTrue, cart, setCart, handleRemoveFromCart, children: { props: 
     }
     const tax = parseFloat((totalPrice * 0.1).toFixed(2));
     const grandTotal = totalPrice + totalDeliveryCharge + tax;
+
     // Reset whole cart function //
     const handleClearCart = (setCart) => {
         setCart([])
