@@ -1,12 +1,10 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './CartItem.css';
-import { removeFromLocalStorage } from '../Utilities/UtilitiesFunction';
 
 
-const CartItem = ({ cartItem, cartItem: { img, name }, handleRemoveFromCart }) => {
-
+const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price, quantity } }) => {
+    console.log(handleRemoveFromCart);
     return (
         <div className='cart-item'>
             <div className='img-container'>
@@ -14,6 +12,8 @@ const CartItem = ({ cartItem, cartItem: { img, name }, handleRemoveFromCart }) =
             </div>
             <div className='name-container'>
                 <h6>{name.length <= 15 ? name : name.slice(0, 15) + '...'}</h6>
+                <p>Price: $ {price}</p>
+                <p>Quantity: {quantity}</p>
             </div>
             <div className='item-btn-container'>
                 <button

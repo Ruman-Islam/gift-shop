@@ -1,88 +1,72 @@
-import React, { useEffect, useState } from 'react';
-import swal from 'sweetalert';
 import Cart from '../Cart/Cart';
+import useProducts from '../../hooks/useProducts';
 import OffCanvas from '../OffCanvas/OffCanvas';
 import Product from '../Product/Product';
-import { addToLocalStorage, getStoredCart, removeFromLocalStorage } from '../Utilities/UtilitiesFunction';
+import { addToLocalStorage, removeFromLocalStorage } from '../Utilities/UtilitiesFunction';
 import './Shop.css';
+import useCart from '../../hooks/useCart';
+import { createContext } from 'react';
+
+const UseCart = createContext([]);
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);  // Initial products loading //
-    const [cart, setCart] = useState([]); // shopping cart //
+    const [products] = useProducts();  // Load from custom hook //
+    const [cart, setCart] = useCart(products); // shopping cart /Load from custom hook //
 
     // Product add to cart function //
     const handleAddToCart = (selectedItem) => {
-        if (cart.length >= 4) {
-            swal("Opps!", "You've already selected 4 items", "warning", { button: "Okay" })
+        let newCart = [];
+        const existingItem = cart.find(cartItem => cartItem.id === selectedItem.id);
+        if (existingItem) {
+            const rest = cart.filter(cartItem => cartItem.id !== selectedItem.id);
+            existingItem.quantity += 1;
+            newCart = [...rest, existingItem];
         } else {
-            let newCart = [];
-            const existingProduct = cart.find(product => product.id === selectedItem.id);
-            if (existingProduct) {
-                swal("Opps!", "Same item can't be added twice", "warning", { button: "Okay" })
-            } else {
-                selectedItem.quantity = 1;
-                newCart = [...cart, selectedItem];
-                setCart(newCart);
-                addToLocalStorage(selectedItem.id);
-            }
+            selectedItem.quantity = 1;
+            newCart = [...cart, selectedItem];
         }
+        setCart(newCart);
+        addToLocalStorage(selectedItem.id);
     }
 
-    // Getting data from local storage while first time loading website //
-    useEffect(() => {
-        const storedCart = getStoredCart();
-        const savedProduct = [];
-        for (const id in storedCart) {
-            const addedProduct = products.find(product => product.id === id);
-            if (addedProduct) {
-                const quantity = storedCart[id]
-                addedProduct.quantity = quantity;
-                savedProduct.push(addedProduct);
-            }
-        }
-        setCart(savedProduct);
-    }, [products])
 
     // single product remove function from cart //
-    const handleRemoveFromCart = (selectedItem) => {
-        const restItems = cart.filter(cartItem => cartItem.id !== selectedItem.id);
-        setCart(restItems);
-        removeFromLocalStorage(selectedItem.id);
-    }
+    // const handleRemoveFromCart = (selectedItem) => {
+    //     const restItems = cart.filter(cartItem => cartItem.id !== selectedItem.id);
+    //     setCart(restItems);
+    //     removeFromLocalStorage(selectedItem.id);
+    // }
 
-    useEffect(() => {  // data loading //
-        fetch('products.json')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [])
 
     return (
-        <div className='shop-container container'>
-            <div className="product-container">
-                {
-                    products.map(product =>
-                        <Product key={product.id}
-                            product={product}
-                            handleAddToCart={handleAddToCart}
-                        />)
-                }
-            </div>
-            <div className="cart-container">
-                <Cart cart={cart}
-                    setCart={setCart}
-                    handleRemoveFromCart={handleRemoveFromCart}
-                />
-            </div>
+        <UseCart.Provider value={cart}>
+            <div className='shop-container container'>
+                <div className="product-container">
+                    {
+                        products.map(product =>
+                            <Product key={product.id}
+                                product={product}
+                                handleAddToCart={handleAddToCart}
+                            />)
+                    }
+                </div>
+                <div className="cart-container">
+                    <Cart cart={cart} setCart={setCart} >
+                        <p>Review Order</p>
+                    </Cart>
+                </div>
 
-            <div className="offCanvas">  {/* off canvas for mobile device */}
-                <OffCanvas
-                    cart={cart}
-                    setCart={setCart}
-                    handleRemoveFromCart={handleRemoveFromCart}
-                />
+                <div className="offCanvas">  {/* off canvas for mobile device */}
+                    <OffCanvas
+                        cart={cart}
+                        setCart={setCart}
+                    // handleRemoveFromCart={handleRemoveFromCart}
+                    > <p>Review Order</p> </OffCanvas>
+                </div>
             </div>
-        </div>
+        </UseCart.Provider>
     );
 };
 
 export default Shop;
+export { UseCart };
