@@ -4,7 +4,6 @@ import './CartItem.css';
 
 
 const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price, quantity, deliveryCharge } }) => {
-    console.log(handleRemoveFromCart);
     return (
         <div className='cart-item'>
             <div className='img-container'>

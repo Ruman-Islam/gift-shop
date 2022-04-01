@@ -4,7 +4,7 @@ import { faTrashCan, faRandom, faArrowRight } from '@fortawesome/free-solid-svg-
 import './Cart.css';
 import { useNavigate } from 'react-router-dom';
 
-const Cart = ({ isTrue, cart, setCart, handleRemoveFromCart, children: { props: { children } = {} } = {} }) => {
+const Cart = ({ isTrue, cart, setCart, children: { props: { children } = {} } = {} }) => {
     const navigate = useNavigate();
 
     let totalPrice = 0;
