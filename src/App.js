@@ -1,3 +1,4 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 // import FAQ from './components/FAQ/FAQ';
 import Menubar from './components/Menubar/Menubar';
@@ -7,7 +8,10 @@ function App() {
   return (
     <div className="App">
       <Menubar />
-      <Shop />
+      <Routes>
+        <Route path='/' element={<Shop />} />
+        <Route path='/shop' element={<Shop />} />
+      </Routes>
       {/* <FAQ /> */}
     </div>
   );

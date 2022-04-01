@@ -13,14 +13,18 @@ nav {
 }
 .navigations {
     display: flex;
+    align-items: center;
 }
 .navigations a {
-    color: #5E2E87;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 600;
     margin-right: 18px;
     margin-top: 10px;
+    font-weight: 700;
+}
+.navigations a:hover {
+  color: #5E2E87 !important;
 }
 #toggler {
     display: none;
@@ -31,7 +35,7 @@ nav {
 .cart-btn {
   margin-top: 12px;
   margin-right: 15px;
-    color: #5E2E87;
+  color: lightslategray;
 }
 
 #bar-icon {

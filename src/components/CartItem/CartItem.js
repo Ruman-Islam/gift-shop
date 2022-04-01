@@ -17,7 +17,7 @@ const CartItem = ({ cartItem, cartItem: { img, name }, handleRemoveFromCart }) =
             </div>
             <div className='item-btn-container'>
                 <button
-                    onClick={() => handleRemoveFromCart(cartItem) + removeFromLocalStorage(cartItem.id)}
+                    onClick={() => handleRemoveFromCart(cartItem)}
                     className='delete-btn'>
                     <FontAwesomeIcon className='icon' icon={faTrashCan} />
                 </button>
