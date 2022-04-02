@@ -81,7 +81,7 @@ let products = [
         quantity: 0
     },
     {
-        id: "c44095f-230e-4502-8816-dea3eaae8320",
+        id: "ac44095f-230e-4502-8816-dea3eaae8320",
         name: "Miriam Marvels CHARM MIST EDP",
         price: 2500,
         ratings: 4,
@@ -109,12 +109,7 @@ let products = [
     }
 ]
 
-export function getProducts() {
-    return products;
-}
 
-export function getProduct(id) {
-    return products.find(
-        (product) => product.id === id
-    );
-}
+export const getProducts = () => products;
+
+export const getProduct = id => products.find(product => product.id === id);
