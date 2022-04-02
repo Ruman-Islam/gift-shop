@@ -2,14 +2,20 @@ import React from 'react';
 import './Product.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
-const Product = ({ product, product: { name, price, img }, handleAddToCart }) => {
+const Product = ({ product, product: { name, price, img, id }, handleAddToCart }) => {
+    const navigate = useNavigate();
     return (
         <div className="card h-100">
-            <div className="product-img-container">
+            <div
+                onClick={() => navigate(`/product-detail/${id}`)}
+                className="product-img-container">
                 <img src={img} alt="product" />
             </div>
-            <div className="card-body">
+            <div
+                onClick={() => navigate(`/product-detail/${id}`)}
+                className="card-body">
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">Price: {'$'}{price}</p>
             </div>

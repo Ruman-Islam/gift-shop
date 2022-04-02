@@ -1,6 +1,7 @@
 .card {
     width: 90%;
     font-family: Comic Sans MS,Comic Sans;
+    cursor: pointer;
 }
 
 .card .product-img-container {
