@@ -9,6 +9,7 @@ import NotFound from './components/NotFound/NotFound';
 // import FAQ from './components/FAQ/FAQ';
 import './App.css';
 import { createContext, useState } from 'react';
+import Footer from './components/Footer/Footer';
 
 export const UseCartIcon = createContext();
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/inventory' element={<Inventory />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
+        <Footer />
         {/* <FAQ /> */}
       </div>
     </UseCartIcon.Provider>

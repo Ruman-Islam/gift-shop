@@ -28,11 +28,11 @@ const Cart = ({ isTrue, cart, setCart, children: { props: { children } } }) => {
     return (
         <div className='cart'>
             <div>
-                <h5 className='cart-title'>Items: {quantity}</h5>
-                <h4>Total Price: {'$'} {totalPrice}</h4>
-                <h4>Total Shipping Charge: {'$'} {totalDeliveryCharge}</h4>
-                <h4>Tax: {'$'} {tax}</h4>
-                <h3>Grand Total: {'$'} {grandTotal}</h3>
+                <h6 className='cart-title'>Items: {quantity}</h6>
+                <h5>Total Price: {'$'} {totalPrice.toFixed(2)}</h5>
+                <h5>Total Shipping Charge: {'$'} {totalDeliveryCharge}</h5>
+                <h5>Tax: {'$'} {tax}</h5>
+                <h4>Grand Total: {'$'} {grandTotal.toFixed(2)}</h4>
             </div> <hr />
             <div className='btn-container'>
                 <button onClick={() => handleClearCart(setCart) + deleteShoppingCart()} className='clear-items-btn'>

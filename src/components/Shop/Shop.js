@@ -7,38 +7,42 @@ import useCart from '../../hooks/useCart';
 import './Shop.css';
 import { createContext, useContext } from 'react';
 import { UseCartIcon } from '../../App';
+import Spinner from '../Spinner/Spinner';
 
 export const UseCart = createContext();
 
 const Shop = () => {
     const [isCartOpen,] = useContext(UseCartIcon);
-    const [products] = useProducts();  // Load from custom hook //
+    const [products, , isTrue] = useProducts();  // Load from custom hook //
     const [cart, setCart] = useCart(products); // shopping cart /Load from custom hook //
+    console.log(isTrue);
 
     return (
-        <UseCart.Provider value={[cart, setCart]}>
-            <div className='shop-container container'>
-                <div className="product-container">
-                    {
-                        products.map(product =>
-                            <Product key={product.id}
-                                product={product}
-                            />)
-                    }
-                </div>
-                <div
-                    className="cart-container"
-                    style={isCartOpen ? { transform: 'translateY(0)' } : { transform: 'translateY(-450px)' }}>
-                    <Cart cart={cart} setCart={setCart} >
-                        <p>Review Order</p>
-                    </Cart>
-                </div>
+        <>
+            {isTrue ? <Spinner /> : <UseCart.Provider value={[cart, setCart]}>
+                <div className='shop-container container'>
+                    <div className="product-container">
+                        {
+                            products.map(product =>
+                                <Product key={product.id}
+                                    product={product}
+                                />)
+                        }
+                    </div>
+                    <div
+                        className="cart-container"
+                        style={isCartOpen ? { transform: 'translateY(0)' } : { transform: 'translateY(-450px)' }}>
+                        <Cart cart={cart} setCart={setCart} >
+                            <p>Review Order</p>
+                        </Cart>
+                    </div>
 
-                {/* <div className="offCanvas">
+                    {/* <div className="offCanvas">
                     <OffCanvas cart={cart} setCart={setCart}> </OffCanvas>
                 </div> */}
-            </div>
-        </UseCart.Provider>
+                </div>
+            </UseCart.Provider>}
+        </>
     );
 };
 
