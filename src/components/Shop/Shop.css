@@ -1,6 +1,6 @@
 .shop-container {
     display: grid;
-    grid-template-columns: 5fr 2fr;
+    grid-template-columns: 4fr 1fr;
     margin-top: 50px;
     position: relative;
 }
@@ -45,7 +45,7 @@
 
 @media screen and (max-width: 1023px) {
     .shop-container {
-        grid-template-columns: 6fr;  /*grid-template-columns: 5fr 2fr*/
+        grid-template-columns: 1fr;  /*grid-template-columns: 5fr 2fr*/
     }
     .product-container {
         grid-template-columns: repeat(2, 1fr); /*grid-template-columns: repeat(2, 1fr)*/

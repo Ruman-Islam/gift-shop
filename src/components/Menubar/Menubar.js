@@ -24,7 +24,7 @@ const Menubar = () => {
                 <CustomLink to="/about">About</CustomLink>
                 <p
                     onClick={() => setIsCartOpen(!isCartOpen)}
-                    className='cart-icon'>
+                    className='cart-icon' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                     <FontAwesomeIcon className="icon" icon={faCartShopping} />
                 </p>
             </div>

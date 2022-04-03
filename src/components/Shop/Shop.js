@@ -34,9 +34,9 @@ const Shop = () => {
                     </Cart>
                 </div>
 
-                {/* <div className="offCanvas">
+                <div className="offCanvas">
                     <OffCanvas cart={cart} setCart={setCart}> </OffCanvas>
-                </div> */}
+                </div>
             </div>
         </UseCart.Provider>
     );

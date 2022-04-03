@@ -28,11 +28,11 @@ const Cart = ({ isTrue, cart, setCart, children: { props: { children } } }) => {
     return (
         <div className='cart'>
             <div>
-                <h5 className='cart-title'>Selected Items: {quantity}</h5>
-                <p>Total Price: {'$'} {totalPrice}</p>
-                <p>Total Shipping Charge: {'$'} {totalDeliveryCharge}</p>
-                <p>Tax: {'$'} {tax}</p>
-                <h5>Grand Total: {'$'} {grandTotal}</h5>
+                <h5 className='cart-title'>Items: {quantity}</h5>
+                <h4>Total Price: {'$'} {totalPrice}</h4>
+                <h4>Total Shipping Charge: {'$'} {totalDeliveryCharge}</h4>
+                <h4>Tax: {'$'} {tax}</h4>
+                <h3>Grand Total: {'$'} {grandTotal}</h3>
             </div> <hr />
             <div className='btn-container'>
                 <button onClick={() => handleClearCart(setCart) + deleteShoppingCart()} className='clear-items-btn'>
@@ -45,13 +45,18 @@ const Cart = ({ isTrue, cart, setCart, children: { props: { children } } }) => {
                     ) : (
                         navigate('/inventory')
                     )
-                }} className='randomize-btn'>
+                }} className='primary-button'>
                     {children}
                     <FontAwesomeIcon className='icon' icon={faArrowRight} />
-                </button>
-                {isTrue && <button onClick={() => handleRandomization(cart, setCart)} className='randomize-btn'>
+                </button> <br />
+                {isTrue && <button onClick={() => handleRandomization(cart, setCart)} className='primary-button'>
                     Choose One
                     <FontAwesomeIcon className="icon" icon={faRandom} />
+                </button>}  <br />
+                {isTrue && <button
+                    onClick={() => navigate('/shop')}
+                    className="primary-button">
+                    CONTINUE SHOPPING
                 </button>}
             </div>
         </div>

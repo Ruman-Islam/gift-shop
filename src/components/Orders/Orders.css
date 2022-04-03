@@ -1,19 +1,40 @@
 .orders-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin: 50px auto;
-    padding: 50px;
-    background-color: #DBEAFE;
-    gap: 10px;
-    border-radius: 20px;
-    font-weight: 600;
+    display: flex;
+    margin-top: 100px !important;
+    flex-wrap: wrap;
 }
 
+.cart-items-container {
+    flex: 2;
+}
+.cart-calculation-container {
+    flex: 1;
+    margin-left: 100px;
+}
 @media screen and (max-width: 1024px) {
     .orders-container {
         grid-template-columns: 1fr;
         padding: 20px;
         text-align: center;
         margin: 0 auto;
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    table tr {
+        display: flex;
+        font-size: 10px !important;
+        flex-direction: column;
+        text-align: center;
+    }
+    input {
+        margin: 0 auto;
+    }
+    .orders-container {
+        flex-direction: column;
+    }
+    .cart-calculation-container {
+        margin-left: 0;
     }
 }
