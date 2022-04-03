@@ -1,0 +1,132 @@
+#banner {
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+.banner-left {
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.banner-left h1 {
+    font-size: 50px;
+    width: 70%;
+}
+.banner-left p {
+    font-size: 20px;
+    margin: 10px 0;
+    width: 70%;
+}
+.banner-title {
+      color: var(--primary-color);
+}
+.banner-right {
+    flex: 2;
+    background-image: url("../../images/Circle\ design.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.banner-right img {
+    width: 80%;
+}
+.primary-button {
+    outline: 0;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px 20px;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    position: relative;
+    z-index: 1;
+}
+  .primary-button:hover {
+    color: #fff;
+}
+.primary-button,
+.primary-button::before {
+    transition: 0.5s ease;
+}
+.primary-button::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 0;
+    height: 100%;
+    border-radius: 50px;
+    background: var(--primary-color);
+    opacity: 0;
+    z-index: -1;
+  }
+  .primary-button:hover::before {
+    width: 100%;
+    opacity: 1;
+  }
+
+  /* .............................................
+          FOR LARGE MOBILE AND TABLET
+.............................................. */
+  
+  @media (max-width: 1280px) {
+    .container {
+      width: 80%;
+      padding: 0 40px;
+    }
+  
+    /* ........Banner Start........ */
+    #banner .banner-left h1 {
+      font-size: 2.5rem;
+    }
+    #banner .banner-left p {
+      font-size: 1.2rem;
+    }
+    #banner .banner-right img {
+      width: 80%;
+    }
+    /* ........Banner End........ */
+  }
+
+  
+  /* .............................................
+          FOR MOBILE AND SMALLER DEVICE
+.............................................. */
+@media (max-width: 768px) {
+   
+ /* ........Banner Start........ */
+    #banner {
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+      padding: 0;
+      margin-top: 50px;
+    }
+    #banner .banner-left {
+      order: 1;
+      align-items: center;
+      align-content: center;
+      text-align: center;
+    }
+    #banner .banner-left h1 {
+      width: 100%;
+      font-size: 35px;
+    }
+    #banner .banner-right {
+      background-position: 35px;
+      margin-bottom: 20px;
+      text-align: center;
+      order: -1;
+    }
+    #banner .banner-right img {
+      width: 80%;
+    }
+    /* ........Banner End........ */
+  }
+  

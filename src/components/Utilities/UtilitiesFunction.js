@@ -62,10 +62,27 @@ const deleteShoppingCart = () => {
     localStorage.removeItem('shopping-cart');
 }
 
+// Product add to cart function //
+const handleAddToCart = (cart, setCart, selectedItem) => {
+    let newCart = [];
+    const existingItem = cart.find(cartItem => cartItem.id === selectedItem.id);
+    if (existingItem) {
+        const rest = cart.filter(cartItem => cartItem.id !== selectedItem.id);
+        existingItem.quantity += 1;
+        newCart = [...rest, existingItem];
+    } else {
+        selectedItem.quantity = 1;
+        newCart = [...cart, selectedItem];
+    }
+    setCart(newCart);
+    addToLocalStorage(selectedItem.id);
+}
+
 export {
     handleRandomization,
-    addToLocalStorage,
+    // addToLocalStorage,
     getStoredCart,
     removeFromLocalStorage,
-    deleteShoppingCart
+    deleteShoppingCart,
+    handleAddToCart
 }

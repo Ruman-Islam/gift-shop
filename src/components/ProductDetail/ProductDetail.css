@@ -1,13 +1,38 @@
-.product-containerr {
+
+.product-detail-container {
+    padding: 50px 20px 60px;
+    margin: 0 auto;
+    max-width: 1000px;
+    /* px-4 pt-20 pb-24 mx-auto max-w-7xl md:px-2  */
+}
+.product-detail {
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 100px;
+    justify-items: center;
+    gap: 20px;
+    justify-content: center;
     align-items: center;
+    margin-top: 100px;
 }
 
-@media screen and (max-width: 576px) {
-    .product-containerr {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    
+.button-container button {
+    margin-top: 20px;
+    width: 150px;
+    border: 0;
 }
+
+
+  /* .............................................
+          FOR MOBILE AND SMALLER DEVICE
+.............................................. */
+@media (max-width: 768px) {
+    .product-detail {
+        grid-template-columns: 1fr;
+        justify-items: space-around;
+    }
+    .detail-container {
+        order: 2;
+    }
+  }
+  
