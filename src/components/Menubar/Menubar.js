@@ -2,8 +2,11 @@ import './Menubar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons';
 import CustomLink from '../CustomLink/CustomLink';
+import { useContext } from 'react';
+import { UseCartIcon } from '../../App';
 
 const Menubar = () => {
+    const [isCartOpen, setIsCartOpen] = useContext(UseCartIcon);
     return (
         <nav>
             <div className="logo">
@@ -19,7 +22,9 @@ const Menubar = () => {
                 <CustomLink to="/orders">Orders</CustomLink>
                 <CustomLink to="/inventory">Inventory</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
-                <p className='cart-btn' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <p
+                    onClick={() => setIsCartOpen(!isCartOpen)}
+                    className='cart-icon'>
                     <FontAwesomeIcon className="icon" icon={faCartShopping} />
                 </p>
             </div>

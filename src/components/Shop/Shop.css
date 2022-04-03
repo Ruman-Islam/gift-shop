@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 5fr 2fr;
     margin-top: 50px;
+    position: relative;
 }
 .product-container {
     display: grid;
@@ -13,18 +14,21 @@
 }
 
 .cart-container {
-   background-color: #DBEAFE;
-    border: 1px solid #dddddd;
-    padding: 30px;
-    border-radius: 10px;
-    height: 100vh;
+    height: 400px;
     position: sticky;
-    top: 0;
-}
-
-.cart-container h4 {
-    text-align: center;
-    margin-bottom: 50px;
+    top: 80px;
+    right: -10px;
+    /* z-index: 99; */
+    list-style: none;
+    margin: 0;
+    min-width: 400px;
+    max-width: 400px;
+    background: #fff;
+    text-align: left;
+    border: 1px solid #eee;
+    overflow: hidden;
+    transition: all 1s;
+    padding: 30px;
 }
 
 .offCanvas {

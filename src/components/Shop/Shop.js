@@ -5,11 +5,13 @@ import Product from '../Product/Product';
 // import { addToLocalStorage, handleAddToCart } from '../Utilities/UtilitiesFunction';
 import useCart from '../../hooks/useCart';
 import './Shop.css';
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
+import { UseCartIcon } from '../../App';
 
 export const UseCart = createContext();
 
 const Shop = () => {
+    const [isCartOpen,] = useContext(UseCartIcon);
     const [products] = useProducts();  // Load from custom hook //
     const [cart, setCart] = useCart(products); // shopping cart /Load from custom hook //
 
@@ -24,15 +26,17 @@ const Shop = () => {
                             />)
                     }
                 </div>
-                <div className="cart-container">
+                <div
+                    className="cart-container"
+                    style={isCartOpen ? { transform: 'translateY(0)' } : { transform: 'translateY(-450px)' }}>
                     <Cart cart={cart} setCart={setCart} >
                         <p>Review Order</p>
                     </Cart>
                 </div>
 
-                <div className="offCanvas">  {/* off canvas for mobile device */}
+                {/* <div className="offCanvas">
                     <OffCanvas cart={cart} setCart={setCart}> </OffCanvas>
-                </div>
+                </div> */}
             </div>
         </UseCart.Provider>
     );

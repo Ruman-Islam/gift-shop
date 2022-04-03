@@ -8,21 +8,29 @@ import Banner from './components/Banner/Banner';
 import NotFound from './components/NotFound/NotFound';
 // import FAQ from './components/FAQ/FAQ';
 import './App.css';
+import { createContext, useState } from 'react';
+
+export const UseCartIcon = createContext();
 
 function App() {
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
-    <div className="App">
-      <Menubar />
-      <Routes>
-        <Route path='/' element={<Banner />} />
-        <Route path='/shop' element={<Shop />} />
-        <Route path='/product-detail/:productId' element={<ProductDetail />} />
-        <Route path='/orders' element={<Orders />} />
-        <Route path='/inventory' element={<Inventory />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-      {/* <FAQ /> */}
-    </div>
+    <UseCartIcon.Provider value={[isCartOpen, setIsCartOpen]}>
+      <div className="App">
+        <Menubar />
+        <Routes>
+          <Route path='/' element={<Banner />} />
+          <Route path='/shop' element={<Shop />} />
+          <Route path='/product-detail/:productId' element={<ProductDetail />} />
+          <Route path='/orders' element={<Orders />} />
+          <Route path='/inventory' element={<Inventory />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+        {/* <FAQ /> */}
+      </div>
+    </UseCartIcon.Provider>
   );
 }
 

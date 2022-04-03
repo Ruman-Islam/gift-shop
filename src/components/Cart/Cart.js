@@ -28,7 +28,6 @@ const Cart = ({ isTrue, cart, setCart, children: { props: { children } } }) => {
     return (
         <div className='cart'>
             <div>
-                <h4>Order Summary</h4>
                 <h5 className='cart-title'>Selected Items: {quantity}</h5>
                 <p>Total Price: {'$'} {totalPrice}</p>
                 <p>Total Shipping Charge: {'$'} {totalDeliveryCharge}</p>

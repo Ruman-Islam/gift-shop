@@ -5,8 +5,10 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { UseCart } from '../Shop/Shop';
 import { handleAddToCart } from '../../components/Utilities/UtilitiesFunction';
+import { UseCartIcon } from '../../App';
 
 const Product = ({ product, product: { name, price, img, id } }) => {
+    const [, setIsCartOpen] = useContext(UseCartIcon);
     const navigate = useNavigate();
     const [cart, setCart] = useContext(UseCart);
     return (
@@ -23,7 +25,7 @@ const Product = ({ product, product: { name, price, img, id } }) => {
                 <p className="card-text">Price: {'$'}{price}</p>
             </div>
             <button
-                onClick={() => handleAddToCart(cart, setCart, product)}
+                onClick={() => handleAddToCart(cart, setCart, product) + setIsCartOpen(true)}
                 className='add-to-cart'>
                 Add to Cart
                 <FontAwesomeIcon className="icon" icon={faCartPlus} />
