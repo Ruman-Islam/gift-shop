@@ -21,7 +21,7 @@ const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price
             <td><h3 className='item-name'>{price}</h3></td>
             <td><input className='form-control item-quantity' type="number" defaultValue={quantity} /></td>
             <td><h4 className='item-name'>{deliveryCharge}</h4></td>
-            <td><h4 className='item-name'>{(price * quantity) + (quantity * deliveryCharge)}</h4></td>
+            <td><h4 className='item-name'>{((price * quantity) + (quantity * deliveryCharge)).toFixed(2)}</h4></td>
         </tr >
     );
 };
