@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="footer">
             <h1>Influencer products</h1>
-            <p>Copyright &copy;2022 influencer products</p>
+            <p>Copyright &copy;2022 influencer Gears</p>
             <small>All rights reserved</small><br />
             <div className="social-icons">
                 <FontAwesomeIcon icon={faHome} />
