@@ -22,9 +22,14 @@ const Menubar = () => {
                 <CustomLink to="/orders">Orders</CustomLink>
                 <CustomLink to="/inventory">Inventory</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
-                <p
+                {/* <p
                     onClick={() => setIsCartOpen(!isCartOpen)}
                     className='cart-icon' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <FontAwesomeIcon className="icon" icon={faCartShopping} />
+                </p> */}
+                <p
+                    onClick={() => setIsCartOpen(!isCartOpen)}
+                    className='cart-icon'>
                     <FontAwesomeIcon className="icon" icon={faCartShopping} />
                 </p>
             </div>

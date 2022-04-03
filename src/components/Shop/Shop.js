@@ -1,6 +1,6 @@
 import Cart from '../Cart/Cart';
 import useProducts from '../../hooks/useProducts';
-import OffCanvas from '../OffCanvas/OffCanvas';
+// import OffCanvas from '../OffCanvas/OffCanvas';
 import Product from '../Product/Product';
 // import { addToLocalStorage, handleAddToCart } from '../Utilities/UtilitiesFunction';
 import useCart from '../../hooks/useCart';
@@ -34,9 +34,9 @@ const Shop = () => {
                     </Cart>
                 </div>
 
-                <div className="offCanvas">
+                {/* <div className="offCanvas">
                     <OffCanvas cart={cart} setCart={setCart}> </OffCanvas>
-                </div>
+                </div> */}
             </div>
         </UseCart.Provider>
     );
