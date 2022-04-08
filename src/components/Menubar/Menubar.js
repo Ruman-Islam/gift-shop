@@ -2,11 +2,36 @@ import './Menubar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons';
 import CustomLink from '../CustomLink/CustomLink';
-import { useContext } from 'react';
 import { UseCartIcon } from '../../App';
+import { useContext, useEffect } from 'react';
+import defaultImage from '../../images/photoplaceholder.jpg';
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import auth from '../../Firebase/firebase.init';
 
 const Menubar = () => {
-    const [isCartOpen, setIsCartOpen] = useContext(UseCartIcon);
+    const navigate = useNavigate();
+    const [isCartOpen, setIsCartOpen, user, setUser] = useContext(UseCartIcon);
+    const { displayName, photoURL } = user;
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser({});
+            }
+        });
+    }, [setUser])
+
+    const handleSignOut = () => {
+        signOut(auth).then(() => {
+            setUser({})
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     return (
         <nav>
             <div className="logo">
@@ -22,16 +47,24 @@ const Menubar = () => {
                 <CustomLink to="/orders">Orders</CustomLink>
                 <CustomLink to="/inventory">Inventory</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
-                {/* <p
-                    onClick={() => setIsCartOpen(!isCartOpen)}
-                    className='cart-icon' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                    <FontAwesomeIcon className="icon" icon={faCartShopping} />
-                </p> */}
                 <p
                     onClick={() => setIsCartOpen(!isCartOpen)}
                     className='cart-icon'>
                     <FontAwesomeIcon className="icon" icon={faCartShopping} />
+                    {/* <sup>{cartItemCount}</sup> */}
                 </p>
+                <div>
+                    <img style={{ width: '30px', height: '30px', borderRadius: '50%' }} src={photoURL ? photoURL : defaultImage} alt="" />
+                </div>
+                {displayName ?
+                    <button onClick={handleSignOut}>Log Out</button>
+                    :
+                    <button onClick={() => navigate('/signin')}
+                    >Log In
+                    </button>}
+                <small style={{ marginLeft: '10px', fontSize: '18px' }}>
+                    <strong>{displayName ? `Hi ${displayName.split(' ')[0]}!` : ''}</strong>
+                </small>
             </div>
         </nav>
     );

@@ -80,7 +80,6 @@ const handleAddToCart = (cart, setCart, selectedItem) => {
 
 export {
     handleRandomization,
-    // addToLocalStorage,
     getStoredCart,
     removeFromLocalStorage,
     deleteShoppingCart,

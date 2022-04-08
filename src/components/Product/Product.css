@@ -2,6 +2,7 @@
     width: 90%;
     font-family: Comic Sans MS,Comic Sans;
     cursor: pointer;
+    margin:  0 auto;
 }
 
 .card .product-img-container {
@@ -34,10 +35,13 @@
 .icon {
     margin-left: 10px;
 }
+.star-icon {
+    color: var(--primary-color);
+}
 
 @media screen and (max-width: 1023px) {
     .card {
-        width: 300px;
+        width: 250px;
     }
 }
 

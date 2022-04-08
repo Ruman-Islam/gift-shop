@@ -1,6 +1,6 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faInstagram, faFacebook, faTwitter, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import './Footer.css';
 
 const Footer = () => {
@@ -10,10 +10,10 @@ const Footer = () => {
             <p>Copyright &copy;2022 influencer Gears</p>
             <small>All rights reserved</small><br />
             <div className="social-icons">
-                <FontAwesomeIcon icon={faHome} />
-                <FontAwesomeIcon className="icon" icon={faHome} />
-                <FontAwesomeIcon className="icon" icon={faHome} />
-                <FontAwesomeIcon className="icon" icon={faHome} />
+                <FontAwesomeIcon icon={faInstagram} />
+                <FontAwesomeIcon className="icon" icon={faFacebook} />
+                <FontAwesomeIcon className="icon" icon={faTwitter} />
+                <FontAwesomeIcon className="icon" icon={faLinkedin} />
             </div>
         </footer>
     );

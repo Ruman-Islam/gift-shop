@@ -24,7 +24,6 @@ const Cart = ({ isTrue, cart, setCart, children: { props: { children } } }) => {
     const handleClearCart = (setCart) => {
         setCart([])
     }
-
     return (
         <div className='cart'>
             <div>

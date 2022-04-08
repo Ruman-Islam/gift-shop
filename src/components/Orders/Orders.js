@@ -21,11 +21,11 @@ const Orders = () => {
             <table className="cart-items-container table">
                 <thead>
                     <tr>
-                        <th scope="col"><h4>Product Title</h4></th>
-                        <th scope="col"><h4>Unit Price</h4></th>
-                        <th scope="col"><h4>Quantity</h4></th>
-                        <th scope="col"><h4>Shipping</h4></th>
-                        <th scope="col"><h4>Subtotal</h4></th>
+                        <th scope="col"><h6><strong>Product Title</strong></h6></th>
+                        <th scope="col"><h6><strong>Unit Price</strong></h6></th>
+                        <th scope="col"><h6><strong>Quantity</strong></h6></th>
+                        <th scope="col"><h6><strong>Shipping</strong></h6></th>
+                        <th scope="col"><h6><strong>Subtotal</strong></h6></th>
                     </tr>
                 </thead>
                 <tbody>

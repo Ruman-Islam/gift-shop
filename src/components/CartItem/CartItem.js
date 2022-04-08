@@ -3,13 +3,13 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './CartItem.css';
 
 
-const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price, quantity, deliveryCharge } }) => {
+const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { name, price, quantity, deliveryCharge } }) => {
     return (
         <tr className='cart-item'>
             <th scope="row">
-                <h4 title={name}>
+                <h6 title={name}>
                     {name.length > 30 ? name.slice(0, 30) + '...' : name}
-                </h4>
+                </h6>
                 <div className='item-btn-container'>
                     <button
                         onClick={() => handleRemoveFromCart(cartItem)}
@@ -18,10 +18,10 @@ const CartItem = ({ handleRemoveFromCart, cartItem, cartItem: { img, name, price
                     </button>
                 </div>
             </th>
-            <td><h3 className='item-name'>{price}</h3></td>
+            <td><h6 style={{ marginLeft: '15px' }}>{price}</h6></td>
             <td><input className='form-control item-quantity' type="number" defaultValue={quantity} /></td>
-            <td><h4 className='item-name'>{deliveryCharge}</h4></td>
-            <td><h4 className='item-name'>{((price * quantity) + (quantity * deliveryCharge)).toFixed(2)}</h4></td>
+            <td><h6 style={{ marginLeft: '40px' }}>{deliveryCharge}</h6></td>
+            <td><h6 style={{ marginLeft: '15px' }}>{((price * quantity) + (quantity * deliveryCharge)).toFixed(2)}</h6></td>
         </tr >
     );
 };

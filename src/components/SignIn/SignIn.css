@@ -1,0 +1,80 @@
+.form-container {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-container form{
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px lightslategray;
+}
+
+.form-container form h5 {
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.form-container input {
+    border: 0;
+    outline: 1px solid var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.form-container form label {
+    margin: 20px 0 0;
+    color: lightslategray;
+    font-size: 12px;
+}
+
+.form-container form .login-btn {
+    border: 0;
+    outline: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+    padding: 4px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+.form-container form small {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.form-container form .social-btn {
+    border: 0;
+    outline: 1px solid var(--primary-color);
+    font-weight: 500;
+    padding: 5px;
+    border-radius: 2px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form-container form .social-btn .social-icon-wrapper {
+    width: 1%;
+    font-size: 17px;
+}
+
+.form-container form .social-btn .social-btn-text-wrapper {
+    width: 99%;
+}
+
+.form-container form .social-btn .social-btn-text-wrapper small {
+    margin-top: 4px;
+    font-size: 16px;
+    font-weight: 700;
+}
