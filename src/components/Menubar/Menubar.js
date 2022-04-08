@@ -12,7 +12,7 @@ import auth from '../../Firebase/firebase.init';
 const Menubar = () => {
     const navigate = useNavigate();
     const [isCartOpen, setIsCartOpen, user, setUser] = useContext(UseCartIcon);
-    const { displayName, photoURL } = user;
+    const { displayName, photoURL, email } = user;
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -56,7 +56,7 @@ const Menubar = () => {
                 <div>
                     <img style={{ width: '30px', height: '30px', borderRadius: '50%' }} src={photoURL ? photoURL : defaultImage} alt="" />
                 </div>
-                {displayName ?
+                {email ?
                     <button onClick={handleSignOut}>Log Out</button>
                     :
                     <button onClick={() => navigate('/signin')}

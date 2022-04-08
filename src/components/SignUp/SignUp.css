@@ -1,0 +1,11 @@
+.error {
+    display: flex;
+    align-items: center;
+    color: red;
+   text-align: start !important;
+   margin-top: 2px;
+}
+
+.warning-icon {
+    margin-right: 5px;
+}
