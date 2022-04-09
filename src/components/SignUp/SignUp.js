@@ -1,23 +1,28 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
-import useGoogleFacebook from '../../hooks/useGoogleFacebook';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import './SignUp.css';
+import { useSignInWithGoogle, useSignInWithFacebook, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/firebase.init';
-import { UseCartIcon } from '../../App';
+import './SignUp.css';
 
 
 const SignUp = () => {
-    const [, , , setUser] = useContext(UseCartIcon);
-    const [handleGoogleSignIn, handleFacebookSignIn] = useGoogleFacebook();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    const [signInWithGoogle, , loadingGoogle,] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, , loadingFacebook,] = useSignInWithFacebook(auth);
+    const [createUserWithEmailAndPassword, , loadingEmail] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile] = useUpdateProfile(auth);
+
     const [email, setEmail] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
     const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' });
     const [userName, setUserName] = useState({ value: '', error: '' });
-    const [newUser, setNewUser] = useState({});
+
 
     const handleDisplayName = event => {
         const displayNameInput = event.target.value;
@@ -60,7 +65,6 @@ const SignUp = () => {
         }
     };
 
-
     const handleSubmit = event => {
         event.preventDefault();
         if (userName.value === "") {
@@ -79,15 +83,13 @@ const SignUp = () => {
             });
         }
         if (email.value && userName.value && password.value === confirmPassword.value) {
-            createUserWithEmailAndPassword(auth, email.value, password.value)
-                .then((result) => {
-                    setUser(result.user);
-                    setNewUser(result.user);
-                    updateProfile(auth.currentUser, {
+            createUserWithEmailAndPassword(email.value, password.value)
+                .then(async (result) => {
+                    await updateProfile({
                         displayName: userName.value
                     }).then(() => {
+                        navigate((-2), from, { replace: true });
                         console.log('User name updated');
-                        setUser(newUser);
                     }).catch((error) => {
                         console.log(error);
                     });
@@ -97,6 +99,19 @@ const SignUp = () => {
                 });
         }
     }
+
+    const handleGoogle = event => {
+        event.preventDefault();
+        signInWithGoogle()
+            .then(() => navigate((-2), from, { replace: true }))
+    }
+
+    const handleFacebook = event => {
+        event.preventDefault();
+        signInWithFacebook()
+            .then(() => navigate((-2), from, { replace: true }))
+    }
+
 
     return (
         <div className='form-container'>
@@ -136,7 +151,7 @@ const SignUp = () => {
                 )}
                 <br />
                 <button className='login-btn' type='submit'>
-                    Create account
+                    {loadingEmail ? 'Loading...' : 'Create account'}
                 </button>
                 <small>
                     Already have an account?
@@ -146,7 +161,7 @@ const SignUp = () => {
                 </small>
                 <small>or</small>
                 <button
-                    onClick={handleGoogleSignIn}
+                    onClick={handleGoogle}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -154,13 +169,13 @@ const SignUp = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            Continue with Google
+                            {loadingGoogle ? 'Loading...' : 'Continue with Google'}
                         </small>
                     </div>
                 </button>
                 <hr />
                 <button
-                    onClick={handleFacebookSignIn}
+                    onClick={handleFacebook}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -168,7 +183,7 @@ const SignUp = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            Continue with Facebook
+                            {loadingFacebook ? 'Loading...' : 'Continue with Facebook'}
                         </small>
                     </div>
                 </button>

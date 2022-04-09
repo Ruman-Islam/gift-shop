@@ -8,11 +8,14 @@ import defaultImage from '../../images/photoplaceholder.jpg';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import auth from '../../Firebase/firebase.init';
+import useUserState from '../../hooks/useUserState';
 
 const Menubar = () => {
     const navigate = useNavigate();
-    const [isCartOpen, setIsCartOpen, user, setUser] = useContext(UseCartIcon);
-    const { displayName, photoURL, email } = user;
+    const [isCartOpen, setIsCartOpen] = useContext(UseCartIcon);
+    const { user, setUser } = useUserState();
+
+    // const { displayName, photoURL, email } = {} = user;
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -42,7 +45,7 @@ const Menubar = () => {
                 <FontAwesomeIcon id='bar-icon' icon={faBars} />
             </label>
             <div className='navigations'>
-                <CustomLink to="/">Home</CustomLink>
+                <CustomLink to="/banner">Home</CustomLink>
                 <CustomLink to="/shop">Shop</CustomLink>
                 <CustomLink to="/orders">Orders</CustomLink>
                 <CustomLink to="/inventory">Inventory</CustomLink>
@@ -54,16 +57,16 @@ const Menubar = () => {
                     {/* <sup>{cartItemCount}</sup> */}
                 </p>
                 <div>
-                    <img style={{ width: '30px', height: '30px', borderRadius: '50%' }} src={photoURL ? photoURL : defaultImage} alt="" />
+                    <img style={{ width: '30px', height: '30px', borderRadius: '50%' }} src={user?.photoURL ? user?.photoURL : defaultImage} alt="" />
                 </div>
-                {email ?
+                {user?.email ?
                     <button onClick={handleSignOut}>Log Out</button>
                     :
                     <button onClick={() => navigate('/signin')}
                     >Log In
                     </button>}
                 <small style={{ marginLeft: '10px', fontSize: '18px' }}>
-                    <strong>{displayName ? `Hi ${displayName.split(' ')[0]}!` : ''}</strong>
+                    <strong>{user?.displayName ? `Hi ${user?.displayName.split(' ')[0]}!` : ''}</strong>
                 </small>
             </div>
         </nav>

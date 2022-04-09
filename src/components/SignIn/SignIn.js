@@ -1,24 +1,27 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
-import './SignIn.css';
-import useGoogleFacebook from '../../hooks/useGoogleFacebook';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import auth from '../../Firebase/firebase.init';
-import { UseCartIcon } from '../../App';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { useSignInWithGoogle, useSignInWithFacebook, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../Firebase/firebase.init';
+import { useState } from 'react';
+import './SignIn.css';
 
 
 const SignIn = () => {
-    const [handleGoogleSignIn, handleFacebookSignIn] = useGoogleFacebook();
-    const [, , , setUser] = useContext(UseCartIcon);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    const [signInWithGoogle, , loadingGoogle,] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, , loadingFacebook,] = useSignInWithFacebook(auth);
+    const [signInWithEmailAndPassword, , loadingEmail,] = useSignInWithEmailAndPassword(auth);
+
     const [email, setEmail] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
 
     const handleEmail = event => {
         const emailInput = event.target.value;
-        // console.log(typeof emailInput);
         if ((emailInput === "")) {
             setEmail({ value: '', error: 'Email Required' })
         } else {
@@ -38,10 +41,9 @@ const SignIn = () => {
     const handleSignInEmailPassword = event => {
         event.preventDefault();
         if (email.value && password.value) {
-            signInWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(email.value, password.value)
                 .then((result) => {
-                    setUser(result.user);
-                    console.log(result.user);
+                    navigate(from, { replace: true });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -50,7 +52,18 @@ const SignIn = () => {
             setEmail({ value: '', error: 'Email Required' })
             setPassword({ value: '', error: 'Password Required' })
         }
+    }
 
+    const handleGoogle = event => {
+        event.preventDefault();
+        signInWithGoogle()
+            .then(() => navigate(from, { replace: true }))
+    }
+
+    const handleFacebook = event => {
+        event.preventDefault();
+        signInWithFacebook()
+            .then(() => navigate(from, { replace: true }))
     }
 
     return (
@@ -76,7 +89,7 @@ const SignIn = () => {
                 <br />
                 <button
                     className='login-btn' type='submit'>
-                    Login
+                    {loadingEmail ? 'Loading...' : 'Login'}
                 </button>
                 <small>
                     New to Influencer Gears?
@@ -86,7 +99,7 @@ const SignIn = () => {
                 </small>
                 <small>or</small>
                 <button
-                    onClick={handleGoogleSignIn}
+                    onClick={handleGoogle}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -94,13 +107,13 @@ const SignIn = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            Continue with Google
+                            {loadingGoogle ? 'Loading...' : 'Continue with Google'}
                         </small>
                     </div>
                 </button>
                 <hr />
                 <button
-                    onClick={handleFacebookSignIn}
+                    onClick={handleFacebook}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -108,7 +121,7 @@ const SignIn = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            Continue with Facebook
+                            {loadingFacebook ? 'Loading...' : 'Continue with Facebook'}
                         </small>
                     </div>
                 </button>

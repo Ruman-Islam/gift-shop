@@ -11,6 +11,7 @@ import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer/Footer';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 // import FAQ from './components/FAQ/FAQ';
 
 export const UseCartIcon = createContext();
@@ -18,19 +19,23 @@ export const UseCartIcon = createContext();
 function App() {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [user, setUser] = useState({});
 
   return (
     <UseCartIcon.Provider
-      value={[isCartOpen, setIsCartOpen, user, setUser]}>
+      value={[isCartOpen, setIsCartOpen]}>
       <div className="App page-container">
         <div className="content-wrap">
           <Menubar />
           <Routes>
             <Route path='/' element={<Banner />} />
+            <Route path='/banner' element={<Banner />} />
             <Route path='/shop' element={<Shop />} />
             <Route path='/product-detail/:productId' element={<ProductDetail />} />
-            <Route path='/orders' element={<Orders />} />
+            <Route path='/orders' element={
+              <RequireAuth>
+                <Orders />
+              </RequireAuth>
+            } />
             <Route path='/inventory' element={<Inventory />} />
             <Route path='/signin' element={<SignIn />} />
             <Route path='/signup' element={<SignUp />} />
