@@ -1,21 +1,21 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { useSignInWithGoogle, useSignInWithFacebook, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import auth from '../../Firebase/firebase.init';
 import { useState } from 'react';
 import './SignIn.css';
+import useFirebase from '../../hooks/useFirebase';
 
 
 const SignIn = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
-
-    const [signInWithGoogle, , loadingGoogle,] = useSignInWithGoogle(auth);
-    const [signInWithFacebook, , loadingFacebook,] = useSignInWithFacebook(auth);
-    const [signInWithEmailAndPassword, , loadingEmail,] = useSignInWithEmailAndPassword(auth);
+    const { googleSignIn,
+        facebookSignIn,
+        handleSignWithInEmailAndPassword,
+        googleLoading,
+        fbLoading,
+        emailLoading,
+        error
+    } = useFirebase();
 
     const [email, setEmail] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
@@ -38,68 +38,54 @@ const SignIn = () => {
         }
     }
 
-    const handleSignInEmailPassword = event => {
-        event.preventDefault();
+    const handleLogin = (e) => {
+        e.preventDefault();
         if (email.value && password.value) {
-            signInWithEmailAndPassword(email.value, password.value)
-                .then((result) => {
-                    navigate(from, { replace: true });
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            handleSignWithInEmailAndPassword(email.value, password.value);
         } else {
             setEmail({ value: '', error: 'Email Required' })
             setPassword({ value: '', error: 'Password Required' })
         }
     }
 
-    const handleGoogle = event => {
-        event.preventDefault();
-        signInWithGoogle()
-            .then(() => navigate(from, { replace: true }))
-    }
-
-    const handleFacebook = event => {
-        event.preventDefault();
-        signInWithFacebook()
-            .then(() => navigate(from, { replace: true }))
-    }
-
     return (
         <div className='form-container'>
-            <form onSubmit={handleSignInEmailPassword}>
+            <form onSubmit={handleLogin}>
                 <h5>Log In</h5>
                 <label htmlFor="email">Email</label>
                 <input onBlur={handleEmail} type="email" name="" id="email" />
-                {email.error && (
+                {email.error &&
                     <small className='error'>
                         <AiOutlineExclamationCircle className='warning-icon' />
                         {email.error}
                     </small>
-                )}
+                }
                 <label htmlFor="password">Password</label>
                 <input onBlur={handlePassword} type="password" name="" id="password" />
-                {password.error && (
+                {password.error &&
                     <small className='error'>
                         <AiOutlineExclamationCircle className='warning-icon' />
                         {password.error}
                     </small>
-                )}
+                }
                 <br />
                 <button
                     className='login-btn' type='submit'>
-                    {loadingEmail ? 'Loading...' : 'Login'}
+                    {emailLoading ? 'Loading...' : 'Login'}
                 </button>
+                {error &&
+                    <small className='error'>
+                        <AiOutlineExclamationCircle className='warning-icon' />
+                        {error}
+                    </small>}
                 <small>
-                    New to Influencer Gears?
                     <Link to='/signup'>
-                        Create New Account
+                        New to Influencer Gears?
                     </Link>
                 </small>
                 <small>or</small>
                 <button
-                    onClick={handleGoogle}
+                    onClick={(e) => googleSignIn(e)}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -107,13 +93,13 @@ const SignIn = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            {loadingGoogle ? 'Loading...' : 'Continue with Google'}
+                            {googleLoading ? 'Loading...' : 'Continue with Google'}
                         </small>
                     </div>
                 </button>
                 <hr />
                 <button
-                    onClick={handleFacebook}
+                    onClick={(e) => facebookSignIn(e)}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -121,7 +107,7 @@ const SignIn = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            {loadingFacebook ? 'Loading...' : 'Continue with Facebook'}
+                            {fbLoading ? 'Loading...' : 'Continue with Facebook'}
                         </small>
                     </div>
                 </button>

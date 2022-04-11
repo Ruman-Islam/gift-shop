@@ -3,37 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons';
 import CustomLink from '../CustomLink/CustomLink';
 import { UseCartIcon } from '../../App';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import defaultImage from '../../images/photoplaceholder.jpg';
 import { useNavigate } from 'react-router-dom';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import auth from '../../Firebase/firebase.init';
-import useUserState from '../../hooks/useUserState';
+import useFirebase from '../../hooks/useFirebase';
 
 const Menubar = () => {
     const navigate = useNavigate();
     const [isCartOpen, setIsCartOpen] = useContext(UseCartIcon);
-    const { user, setUser } = useUserState();
-
-    // const { displayName, photoURL, email } = {} = user;
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser({});
-            }
-        });
-    }, [setUser])
-
-    const handleSignOut = () => {
-        signOut(auth).then(() => {
-            setUser({})
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+    const { user, handleSignOut } = useFirebase();
 
     return (
         <nav>
@@ -60,14 +38,20 @@ const Menubar = () => {
                     <img style={{ width: '30px', height: '30px', borderRadius: '50%' }} src={user?.photoURL ? user?.photoURL : defaultImage} alt="" />
                 </div>
                 {user?.email ?
-                    <button onClick={handleSignOut}>Log Out</button>
+                    <div>
+                        <button style={{ marginTop: '15px' }} onClick={handleSignOut}>
+                            Log out
+                        </button>
+                        <small style={{ marginLeft: '12px', fontSize: '12px' }}>
+                            <strong>
+                                {user.displayName ? `Hi, ${user.displayName.split(' ')[0]}` : ''}
+                            </strong>
+                        </small>
+                    </div>
                     :
                     <button onClick={() => navigate('/signin')}
                     >Log In
                     </button>}
-                <small style={{ marginLeft: '10px', fontSize: '18px' }}>
-                    <strong>{user?.displayName ? `Hi ${user?.displayName.split(' ')[0]}!` : ''}</strong>
-                </small>
             </div>
         </nav>
     );

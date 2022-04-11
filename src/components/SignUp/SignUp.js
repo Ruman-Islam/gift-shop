@@ -1,38 +1,37 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons"
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import { useSignInWithGoogle, useSignInWithFacebook, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
-import auth from '../../Firebase/firebase.init';
+import useFirebase from '../../hooks/useFirebase';
 import './SignUp.css';
 
 
 const SignUp = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    const {
+        googleSignIn,
+        facebookSignIn,
+        handleCreateAccountWithEmailAndPassword,
+        googleLoading,
+        fbLoading,
+        emailLoading,
+        error
+    } = useFirebase();
 
-    const [signInWithGoogle, , loadingGoogle,] = useSignInWithGoogle(auth);
-    const [signInWithFacebook, , loadingFacebook,] = useSignInWithFacebook(auth);
-    const [createUserWithEmailAndPassword, , loadingEmail] = useCreateUserWithEmailAndPassword(auth);
-    const [updateProfile] = useUpdateProfile(auth);
-
+    const [userName, setUserName] = useState({ value: '', error: '' });
     const [email, setEmail] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
     const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' });
-    const [userName, setUserName] = useState({ value: '', error: '' });
 
-
-    const handleDisplayName = event => {
-        const displayNameInput = event.target.value;
-        if (userName) {
+    const handleDisplayName = e => {
+        const displayNameInput = e.target.value;
+        if (displayNameInput) {
             setUserName({ value: displayNameInput, error: '' })
         }
     }
 
-    const handleEmail = event => {
-        const emailInput = event.target.value;
+    const handleEmail = e => {
+        const emailInput = e.target.value;
         if (/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(emailInput)) {
             setEmail({ value: emailInput, error: '' });
         } else {
@@ -40,8 +39,8 @@ const SignUp = () => {
         }
     }
 
-    const handlePassword = event => {
-        const passwordInput = event.target.value;
+    const handlePassword = e => {
+        const passwordInput = e.target.value;
         if (passwordInput.length < 6) {
             setPassword({ value: '', error: 'Password too short' })
         } else if (!/^(?=.*[A-Z])/.test(passwordInput)) {
@@ -55,18 +54,8 @@ const SignUp = () => {
         }
     }
 
-    const handleConfirmPassword = (event) => {
-        const confirmInput = event.target.value;
-
-        if (confirmInput !== password.value) {
-            setConfirmPassword({ value: "", error: "Password mismatched" });
-        } else {
-            setConfirmPassword({ value: confirmInput, error: "" });
-        }
-    };
-
-    const handleSubmit = event => {
-        event.preventDefault();
+    const handleRegister = (e) => {
+        e.preventDefault();
         if (userName.value === "") {
             setUserName({ value: "", error: "Username is required" });
         }
@@ -76,46 +65,18 @@ const SignUp = () => {
         if (password.value === "") {
             setPassword({ value: "", error: "Password is required" });
         }
-        if (confirmPassword.value === "") {
-            setConfirmPassword({
-                value: "",
-                error: "Password confirmation is required",
-            });
+        if (confirmPassword.value !== password.value) {
+            console.log(confirmPassword.value);
+            setConfirmPassword({ value: "", error: "Password mismatched" });
         }
-        if (email.value && userName.value && password.value === confirmPassword.value) {
-            createUserWithEmailAndPassword(email.value, password.value)
-                .then(async (result) => {
-                    await updateProfile({
-                        displayName: userName.value
-                    }).then(() => {
-                        navigate((-2), from, { replace: true });
-                        console.log('User name updated');
-                    }).catch((error) => {
-                        console.log(error);
-                    });
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        if (userName.value && email.value && password.value && confirmPassword.value) {
+            handleCreateAccountWithEmailAndPassword(userName.value, email.value, password.value);
         }
     }
-
-    const handleGoogle = event => {
-        event.preventDefault();
-        signInWithGoogle()
-            .then(() => navigate((-2), from, { replace: true }))
-    }
-
-    const handleFacebook = event => {
-        event.preventDefault();
-        signInWithFacebook()
-            .then(() => navigate((-2), from, { replace: true }))
-    }
-
 
     return (
         <div className='form-container'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleRegister}>
                 <h5>Sign Up</h5>
                 <label htmlFor="username">Username</label>
                 <input onBlur={handleDisplayName} type="text" name="" id="username" />
@@ -142,7 +103,7 @@ const SignUp = () => {
                     </small>
                 )}
                 <label htmlFor="confirm-password">Confirm Password</label>
-                <input onBlur={handleConfirmPassword} type="password" name="" id="confirm-password" />
+                <input onBlur={(e) => setConfirmPassword({ value: e.target.value, error: "" })} type="password" name="" id="confirm-password" />
                 {confirmPassword.error && (
                     <small className='error'>
                         <AiOutlineExclamationCircle className='warning-icon' />
@@ -150,18 +111,24 @@ const SignUp = () => {
                     </small>
                 )}
                 <br />
-                <button className='login-btn' type='submit'>
-                    {loadingEmail ? 'Loading...' : 'Create account'}
+                <button
+                    className='login-btn' type='submit'>
+                    {emailLoading ? 'Loading...' : 'Create account'}
                 </button>
+                {error &&
+                    <small className='error'>
+                        <AiOutlineExclamationCircle className='warning-icon' />
+                        {error}
+                    </small>
+                }
                 <small>
-                    Already have an account?
                     <Link to='/signin'>
-                        Sign In
+                        Already have an account?
                     </Link>
                 </small>
                 <small>or</small>
                 <button
-                    onClick={handleGoogle}
+                    onClick={googleSignIn}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -169,13 +136,13 @@ const SignUp = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            {loadingGoogle ? 'Loading...' : 'Continue with Google'}
+                            {googleLoading ? 'Loading...' : 'Continue with Google'}
                         </small>
                     </div>
                 </button>
                 <hr />
                 <button
-                    onClick={handleFacebook}
+                    onClick={facebookSignIn}
                     className='social-btn'>
                     <div
                         className='social-icon-wrapper'>
@@ -183,7 +150,7 @@ const SignUp = () => {
                     </div>
                     <div className='social-btn-text-wrapper'>
                         <small>
-                            {loadingFacebook ? 'Loading...' : 'Continue with Facebook'}
+                            {fbLoading ? 'Loading...' : 'Continue with Facebook'}
                         </small>
                     </div>
                 </button>
