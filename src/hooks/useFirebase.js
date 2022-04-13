@@ -35,6 +35,7 @@ const useFirebase = () => {
                 setGoogleLoading(false);
             }).catch((error) => {
                 setError(error.message);
+                setGoogleLoading(false);
             });
     }
 
@@ -48,6 +49,7 @@ const useFirebase = () => {
                 setFbLoading(false);
             }).catch((error) => {
                 setError(error.message);
+                setFbLoading(false);
             });
     }
 
@@ -77,6 +79,7 @@ const useFirebase = () => {
                     navigate((-2), from, { replace: true });
                 }).catch((error) => {
                     setError(error.message);
+                    setEmailLoading(false);
                 });
             })
             .catch((error) => {
