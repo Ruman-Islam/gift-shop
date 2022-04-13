@@ -65,12 +65,15 @@ const SignUp = () => {
         if (password.value === "") {
             setPassword({ value: "", error: "Password is required" });
         }
-        if (confirmPassword.value !== password.value) {
-            console.log(confirmPassword.value);
-            setConfirmPassword({ value: "", error: "Password mismatched" });
-        }
+
         if (userName.value && email.value && password.value && confirmPassword.value) {
-            handleCreateAccountWithEmailAndPassword(userName.value, email.value, password.value);
+            if (confirmPassword.value !== password.value) {
+                console.log(confirmPassword.value);
+                setConfirmPassword({ value: "", error: "Password mismatched" });
+            } else {
+                handleCreateAccountWithEmailAndPassword(userName.value, email.value, password.value);
+            }
+
         }
     }
 

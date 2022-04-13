@@ -6,12 +6,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBf6u6L9dYzb6mT6ecDuyB0ZQxkB2x5zvw",
-    authDomain: "influencer-gears.firebaseapp.com",
-    projectId: "influencer-gears",
-    storageBucket: "influencer-gears.appspot.com",
-    messagingSenderId: "771461076651",
-    appId: "1:771461076651:web:86336b4bfeecadf38a89ee"
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_storageBucket,
+    appId: process.env.REACT_APP_appId
 };
 
 // Initialize Firebase
